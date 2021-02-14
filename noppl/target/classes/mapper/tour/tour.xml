@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tour">
+	
+	<sql id="tourWhere">
+		<where> <!-- 아래 조건이 있으면 where 붙임 -->
+			<!-- 이름이나 아이디 검색 -->
+			<if test="searchWord != null and searchWord != ''"> <!-- where 다음에 and가 오면 자동으로 제거 -->
+			and (title like '%${searchWord}%' or content like '%${searchWord}%')
+			</if>
+			<!-- 마이페이지 -->
+			<if test="user_no != 0">
+			and user_no=#{user_no}
+			</if>
+		</where>
+	</sql>	
+	
+	<select id="selectlist" resultType = "tour.TourVo">
+		SELECT * FROM tour_info;
+	</select>
+</mapper>
+
