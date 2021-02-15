@@ -3,18 +3,21 @@
 <!doctype html>
 <html lang="ko">
 <head>
+
 <title><%=util.Property.title %></title>
 <%@ include file="/WEB-INF/view//include/headHtml.jsp" %>
 <script type="text/javascript">
+
 function directionTop() {
 	$('html, body').animate({scrollTop: 0 }, 'slow');
 }
+
 var tabWidth = 120;		// 탭넓이
 
 // iframe height 자동 조절
 function calcHeight(id){
-	//find the height of the internal page
 	
+	//find the height of the internal page
 	var the_height=
 	document.getElementById(id).contentWindow.
 	document.body.scrollHeight;
@@ -301,9 +304,10 @@ function test() {
 <body>
 <div id="wrap">
 	<div id="header">
-		<h1><a href="<%=util.Property.contextPath%>/index.do">개인 포트폴리오</a><a href="javascript:;" onclick="test()">&nbsp;&nbsp;&nbsp;</a></h1>
+		<h1><a href="<%=util.Property.contextPath%>/index.do">Noppl</a><a href="javascript:;" onclick="test()">&nbsp;&nbsp;&nbsp;</a></h1>
+			<!-- href="javascript:;" 유저에게 보이고 싶지 않을떄 사용. -->
 		<ul class="topmenu">
-			<li class="logout"></li>
+			<li class="logout"><a href = "https://www.naver.com/" target="_blank" >로그아웃</a></li>
 			<li class="homepage"><a href="http://gdu.co.kr" target="_blank">팀프로젝트</a></li>
 		</ul>
 	</div>
@@ -446,5 +450,6 @@ function test() {
 	</div>
 	<!--//container-->
 </div>
+
 </body>
 </html>

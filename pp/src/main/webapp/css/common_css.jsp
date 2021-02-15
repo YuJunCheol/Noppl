@@ -14,11 +14,11 @@ a:hover{transition: 0.5s !important;}
 ================================================== */
 #header{width:100%; position:relative; z-index:99; width:1200px; margin:0; padding:0; height:60px;  border-bottom:2px solid <%=util.Property.color%>;}
 #header h1{position:absolute; left:10px; top:5px;}
-#header .topmenu{position:absolute; right:10px; top:20px;}
+#header .topmenu {position:absolute; right:10px; top:20px;}
 #header .topmenu > li{float:left; width:auto; position:relative; margin-left:20px; }
 #header .topmenu > li.logout{position:relative;}
 #header .topmenu > li.logout a{font-weight:600; padding:0 10px;}
-#header .topmenu > li.homepage{}
+#header .topmenu > li.homepage a{font-weight:600;}
 #header .topmenu > li.logout:after{content:""; position:absolute; right:-5px; top:5px; height:12px; background:#e6e6e6; width:1px;}
 
 /* ==================================================

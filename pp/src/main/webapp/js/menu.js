@@ -1,4 +1,5 @@
 
+//  $(document).ready(function(){ }); 와 $(function(){ }); 는 동일한 의미
 
 $(function() {
 		//전체메뉴
