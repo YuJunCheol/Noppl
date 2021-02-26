@@ -23,10 +23,12 @@ public class GetData {
 	private String serVicekey = "06%2BQ4PwUZvpUSyIXm0NpMqx62GwlHanrSmW2D7dHHa6XqYvJLKpgE4tSAIzlXnGFV0g%2BKR2fv5g45hAJNOe1JA%3D%3D";
 	private String endPoint ="http://api.visitkorea.or.kr/openapi/service";
 	List<AreaVo> arealist = new ArrayList<AreaVo>(); // 지역 리스트
+	
 	List<SigunguVo> sigungulist = new ArrayList<SigunguVo>();
 	List<TourVo> tourlist = new ArrayList<TourVo>();
 	List<ImageVo> imagelist = new ArrayList<ImageVo>();
 	List<OverviewVo> overviewlist = new ArrayList<OverviewVo>();
+	
 	int imaged = 0;
 	int overviewd = 0;
 	DB db = new DB();
@@ -123,6 +125,7 @@ public class GetData {
 	}
 	
 	public List<TourVo> getTour(int city_code, int sigungu_code) {
+		
 		String url = endPoint + "/rest/KorService/areaBasedList?serviceKey=" + serVicekey;
 		String numOfRows = "&numOfRows=" + "100";
 		String pageNo = "&pageNo=" + "1";

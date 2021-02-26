@@ -18,5 +18,8 @@
 	<select id="selectlist" resultType = "tour.TourVo">
 		SELECT * FROM tour_info;
 	</select>
+	<select id="selectArea" resultType = "tour.AreaVo">
+		SELECT * FROM area;
+	</select>
 </mapper>
 
