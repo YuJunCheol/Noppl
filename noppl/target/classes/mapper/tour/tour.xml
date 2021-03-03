@@ -2,24 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tour">
 	
-	<sql id="tourWhere">
+	<sql id="areaWhere">
 		<where> <!-- 아래 조건이 있으면 where 붙임 -->
-			<!-- 이름이나 아이디 검색 -->
-			<if test="searchWord != null and searchWord != ''"> <!-- where 다음에 and가 오면 자동으로 제거 -->
-			and (title like '%${searchWord}%' or content like '%${searchWord}%')
-			</if>
-			<!-- 마이페이지 -->
-			<if test="user_no != 0">
-			and user_no=#{user_no}
+			<!-- 만약 입력된 지역이 있으면 그 지역을 검색. -->
+			<if test="searchArea != null and searchArea != ''"> <!-- where 다음에 and가 오면 자동으로 제거 -->
+				<if test="selectopt = area">
+					and (city_name like '%${searchArea}%')
+				</if>
+				<if test="selectopt = tour">
+					and (sigungu_name like '%${searchArea}%')
+				</if>
 			</if>
 		</where>
-	</sql>	
+	</sql>
 	
-	<select id="selectlist" resultType = "tour.TourVo">
+	<select id="selectTour" resultType = "tour.TourVo">
 		SELECT * FROM tour_info;
 	</select>
+	
+	
 	<select id="selectArea" resultType = "tour.AreaVo">
-		SELECT * FROM area;
+		SELECT distinct  t.title, a.city_name AS area, s.sigungu_name
+		FROM tour_info AS t 
+		INNER JOIN area AS a ON t.city_code = a.city_code 
+		INNER JOIN sigungu AS s ON t.sigungu_code = s.sigungu_code
+		<include refid="areaWhere"/>
+		order by sigungu_name asc
+		limit 0,10;
+	</select>
+	
+	
+	<select id="selectSigungu" resultType = "tour.SigunguVo">
+		SELECT * FROM sigungu;
 	</select>
 </mapper>
 

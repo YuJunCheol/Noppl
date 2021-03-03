@@ -61,8 +61,8 @@ public class GetData {
 				
 				try {
 					AreaVo areaVo = new AreaVo();
-					areaVo.setArea_name(getTagValue("name",(Element)nodeItem));
-					areaVo.setArea_code(Integer.parseInt(getTagValue("code",(Element)nodeItem)));
+					areaVo.setCity_name(getTagValue("name",(Element)nodeItem));
+					areaVo.setCity_code(Integer.parseInt(getTagValue("code",(Element)nodeItem)));
 					arealist.add(areaVo);
 				}catch (Exception e) {
 					return null;
@@ -109,7 +109,7 @@ public class GetData {
 					// System.out.println(sigunguVo.getArea_code() + " - " + sigunguVo.getSigungu_name() + " - " + sigunguVo.getSigungu_code());
 					sigungulist.add(sigunguVo);
 					
-					getTour(sigunguVo.getArea_code() , sigunguVo.getSigungu_code());
+					getTour(sigunguVo.getArea_code() );
 					
 					db.InsertSigungu(sigunguVo);
 				}catch (Exception e) {
@@ -124,20 +124,20 @@ public class GetData {
 		}
 	}
 	
-	public List<TourVo> getTour(int city_code, int sigungu_code) {
+	public List<TourVo> getTour(int city_code) {
 		
 		String url = endPoint + "/rest/KorService/areaBasedList?serviceKey=" + serVicekey;
-		String numOfRows = "&numOfRows=" + "100";
+		String numOfRows = "&numOfRows=" + "339";
 		String pageNo = "&pageNo=" + "1";
 		String MobileOS = "&MobileOS=" + "ETC";
 		String MobileApp = "&MobileApp=" + "Noppl";
 		String arrange = "&arrange=A";
 		String contentTypeId = "&contentTypeId=12";
-		String sigunguCode = "&sigunguCode=" + Integer.toString(sigungu_code);
+		String sigunguCode = "&sigunguCode= ";
 		String areaCode = "&areaCode=" + Integer.toString(city_code);
 		String listYN = "&listYN=Y";
-		url += pageNo + numOfRows + MobileApp + MobileOS + arrange + contentTypeId + areaCode + sigunguCode + listYN;
-		// System.out.println(url); 
+		url += pageNo + numOfRows + MobileApp + MobileOS + arrange + contentTypeId + areaCode + listYN;
+		//System.out.println(url); 
 		// &pageNo=1&numOfRows=100&MobileApp=Noppl&MobileOS=ETC&arrange=A&contentTypeId=12&areaCode=4&sigunguCode=4&listYN=Y
 		try {
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -152,59 +152,67 @@ public class GetData {
 				return null;
 			}
 			
+			
 			//System.out.println(nodeList.getLength());
 			
-			for(int i=0; i<nodeList.getLength(); i ++) {
+			for(int i=0; i < nodeList.getLength(); i ++) {
 				Node nodeItem = nodeList.item(i);
 				
 				try {
 					TourVo tourVo = new TourVo();
-					tourVo.setAddr1(getTagValue("addr1",(Element)nodeItem));
-					tourVo.setAddr2(getTagValue("addr2",(Element)nodeItem));
-					tourVo.setAreacode(Integer.parseInt(getTagValue("areacode",(Element)nodeItem)));
-					tourVo.setCat1(getTagValue("cat1",(Element)nodeItem));
-					// System.out.println(tourVo.getCat1());
-					tourVo.setCat2(getTagValue("cat2",(Element)nodeItem));
-					// System.out.println(tourVo.getCat2());
-					tourVo.setCat3(getTagValue("cat3",(Element)nodeItem));
-					// System.out.println(tourVo.getCat3());
-					tourVo.setContentid(getTagValue("contentid",(Element)nodeItem));
-					// System.out.println(tourVo.getContentid());
-					tourVo.setContenttypeid(Integer.parseInt(getTagValue("contenttypeid", (Element)nodeItem)));
-					// System.out.println(tourVo.getContenttypeid());
-					tourVo.setCreatedtime(getTagValue("createdtime", (Element)nodeItem));
-					// System.out.println(tourVo.getCreatedtime()); 
-					tourVo.setFirstimage(getTagValue("firstimage",(Element)nodeItem));
-					// System.out.println(tourVo.getFirstimage());
-					tourVo.setFirstimage2(getTagValue("firstimage2",(Element)nodeItem));
-					// System.out.println(tourVo.getFirstimage2());
-					tourVo.setMapx(getTagValue("mapx",(Element)nodeItem));
-					// System.out.println(tourVo.getMapx());
-					tourVo.setMapy(getTagValue("mapy",(Element)nodeItem));
-					// System.out.println(tourVo.getMapy());
-					tourVo.setMaplevel(Integer.parseInt(getTagValue("mlevel",(Element)nodeItem)));
-					// System.out.println(tourVo.getMaplevel());
-					tourVo.setModifiedtime(getTagValue("modifiedtime",(Element)nodeItem));
-					// System.out.println(tourVo.getModifiedtime());
-					tourVo.setReadcount(Integer.parseInt(getTagValue("readcount",(Element)nodeItem)));
-					tourVo.setSigungucode(Integer.parseInt(getTagValue("sigungucode",(Element)nodeItem)));
-					tourVo.setTel(getTagValue("tel",(Element)nodeItem));
-					// System.out.println(tourVo.getTel());
-					tourVo.setTitle(getTagValue("title",(Element)nodeItem));
-					// System.out.println(tourVo.getTitle());
-					tourVo.setZipcode(getTagValue("zipcode",(Element)nodeItem));
-					// System.out.println(tourVo.getZipcode());
 					
-					//db.InsertTour(tourVo);
+					if(getTagValue("addr1",(Element)nodeItem) != null)
+						tourVo.setAddr1(getTagValue("addr1",(Element)nodeItem));
+					if(getTagValue("addr2",(Element)nodeItem) != null)
+						tourVo.setAddr2(getTagValue("addr2",(Element)nodeItem));
+					if(getTagValue("areacode",(Element)nodeItem) != null)
+						tourVo.setAreacode(Integer.parseInt(getTagValue("areacode",(Element)nodeItem)));
+					if(getTagValue("cat1",(Element)nodeItem) != null)
+						tourVo.setCat1(getTagValue("cat1",(Element)nodeItem));
+					if(getTagValue("cat2",(Element)nodeItem) != null)
+						tourVo.setCat2(getTagValue("cat2",(Element)nodeItem));
+					if(getTagValue("cat3",(Element)nodeItem) != null)
+						tourVo.setCat3(getTagValue("cat3",(Element)nodeItem));
+					if(getTagValue("contentid",(Element)nodeItem) != null)
+						tourVo.setContentid(getTagValue("contentid",(Element)nodeItem));
+					if(getTagValue("contenttypeid", (Element)nodeItem) != null)
+						tourVo.setContenttypeid(Integer.parseInt(getTagValue("contenttypeid", (Element)nodeItem)));
+					if (getTagValue("createdtime", (Element)nodeItem) != null)
+						tourVo.setCreatedtime(getTagValue("createdtime", (Element)nodeItem));
+					if(getTagValue("firstimage",(Element)nodeItem) != null) 
+						tourVo.setFirstimage(getTagValue("firstimage",(Element)nodeItem));
+					if(getTagValue("firstimage2",(Element)nodeItem) != null) 
+						tourVo.setFirstimage2(getTagValue("firstimage2",(Element)nodeItem));
+					if(getTagValue("mapx",(Element)nodeItem) != null) 
+						tourVo.setMapx(getTagValue("mapx",(Element)nodeItem));
+					if(getTagValue("mapy",(Element)nodeItem) != null)
+						tourVo.setMapy(getTagValue("mapy",(Element)nodeItem));
+					if(getTagValue("mlevel",(Element)nodeItem) != null)
+						tourVo.setMaplevel(Integer.parseInt(getTagValue("mlevel",(Element)nodeItem)));
+					if(getTagValue("modifiedtime",(Element)nodeItem) != null)
+						tourVo.setModifiedtime(getTagValue("modifiedtime",(Element)nodeItem));
+					if(getTagValue("readcount",(Element)nodeItem) != null)
+						tourVo.setReadcount(Integer.parseInt(getTagValue("readcount",(Element)nodeItem)));
+					if(getTagValue("sigungucode",(Element)nodeItem) != null)
+						tourVo.setSigungucode(Integer.parseInt(getTagValue("sigungucode",(Element)nodeItem)));
+					if(getTagValue("tel",(Element)nodeItem) != null)
+						tourVo.setTel(getTagValue("tel",(Element)nodeItem));
+					if(getTagValue("title",(Element)nodeItem) != null)
+						tourVo.setTitle(getTagValue("title",(Element)nodeItem));
+					if(getTagValue("zipcode",(Element)nodeItem) != null)
+						tourVo.setZipcode(getTagValue("zipcode",(Element)nodeItem));
 					
-					getTourImage(tourVo.getContentid());
-					getOverView(tourVo.getContentid());
+					db.InsertTour(tourVo);
 					
-					tourlist.add(tourVo);
+					// System.out.println(getTagValue("contentid",(Element)nodeItem));
+					// getTourImage(tourVo.getContentid());
+					// getOverView(tourVo.getContentid());
+					
+					// tourlist.add(tourVo);
 
 					//db.InsertSigungu(sigunguVo);
 				}catch (Exception e) {
-					System.out.println("");
+					System.out.println("ERROR : " + e.getMessage());
 					return null;
 				}
 			}
@@ -217,6 +225,25 @@ public class GetData {
 			return null;
 		}
 	}
+	
+	public static void main(String args[]) {
+		GetData g = new GetData();
+		// g.getArea();
+		// Iterator it = g.arealist.iterator();
+		g.getTour(39);
+
+		//g.InsertImageOverView();
+		System.out.println("완료");
+		//int i=0;
+		//g.getSigungu(35);
+		/*
+		 * while(it.hasNext()) { AreaVo vo = (AreaVo)it.next(); // db.InsertArea(vo); //
+		 * g.getSigungu(1); }
+		 */
+		
+		
+	}
+		
 	
 	
 	public List<ImageVo> getTourImage(String Id) {
@@ -336,22 +363,7 @@ public class GetData {
 		
 	}
 	
-	
-	public static void main(String args[]) {
-		GetData g = new GetData();
-		// g.getArea();
-		// Iterator it = g.arealist.iterator();
-		//g.getTour(31, 28);
 
-		g.InsertImageOverView();
-		System.out.println("완료");
-		int i=0;
-		//g.getSigungu(35);
-		/*
-		 * while(it.hasNext()) { AreaVo vo = (AreaVo)it.next(); // db.InsertArea(vo); //
-		 * g.getSigungu(1); }
-		 */
-	}
 
 	
 	

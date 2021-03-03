@@ -63,8 +63,8 @@ public class DB {
 				+ "VALUES(?,?);";
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, vo.getArea_code() );
-			pstmt.setString(2, vo.getArea_name() );
+			pstmt.setInt(1, vo.getCity_code() );
+			pstmt.setString(2, vo.getCity_name() );
 			r = pstmt.executeUpdate();
 			
 		}catch(Exception e) {
@@ -90,7 +90,7 @@ public class DB {
 	
 	public void InsertTour(TourVo vo) {
 		int r = 0;
-		String sql = "INSERT INTO tour_info (addr1, addr2,areacode,cat1,cat2,cat3,contentid,contenttypeid,createdtime,firstimage,firstimage2,mapx,mapy,mlevel,modifiedtime,readcount,sigungucode,tel,title,zipcode)"
+		String sql = "INSERT INTO tour_info (addr1, addr2,city_code,cat1,cat2,cat3,contentid,contenttypeid,createdtime,firstimage,firstimage2,mapx,mapy,mlevel,modifiedtime,readcount,sigungu_code,tel,title,zipcode)"
 				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		try {
 			pstmt = con.prepareStatement(sql);

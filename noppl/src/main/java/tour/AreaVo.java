@@ -1,22 +1,34 @@
 package tour;
 
-public class AreaVo {
+import vo.CommonVo;
+
+public class AreaVo extends CommonVo {
 	
-	private String area_name;
-	private int area_code;
+	private String title;
+	private String area;
+	private String sigungu_name;
 	
-	public String getArea_name() {
-		return area_name;
+	public String getTitle() {
+		return title;
 	}
-	public void setArea_name(String area_name) {
-		this.area_name = area_name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public int getArea_code() {
-		return area_code;
+	public String getArea() {
+		return area;
 	}
-	public void setArea_code(int area_code) {
-		this.area_code = area_code;
+	public void setArea(String area) {
+		this.area = area;
 	}
+	public String getSigungu_name() {
+		return sigungu_name;
+	}
+	public void setSigungu_name(String sigungu_name) {
+		this.sigungu_name = sigungu_name;
+	}
+	
+	
+	
 	
 	
 }

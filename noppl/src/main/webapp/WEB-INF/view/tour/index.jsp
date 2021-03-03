@@ -9,18 +9,36 @@
 <meta charset="UTF-8">
 <title></title>
 
+<script>
+
+function getSelect() {
+	$("input[name='selectopt']").val($("#selectopt").val());
+}
+
+</script>
+
 </head>
 <body>
-관광지 목록
+<h3>관광지 목록</h3>
+
+<form action="index.do" onsubmit="getSelect();" >
+	<select id ="selectopt">
+		<option value="area">지역</option>
+		<option value="tour">관광지 명</option>
+	</select> 
+	<input type="text" name="searchArea" value="${param.searchArea }">
+	<input type = "submit" value = "검색">
+</form>
+
 <table	border ="1">
 	<tr>
-		<th>No.</th><th>관광지명</th><th>제목</th><th>추천 수</th><th>작성자</th><th>등록일</th><th> </th>
+		<th>No.</th><th>관광지명</th><th>지역명</th><th>시군구 이름</th><th>후기 수</th><th>조회 수</th><th>최종 수정일</th>
 	</tr>
-	<c:forEach var = "vo" items ="${list}">
+	<c:forEach var = "vo" items ="${list}" >
 		<tr>
-			<td>${vo.areacode }</td>
+			<td>${vo.no}</td>
 			<td>${vo.title}</td>
-			<td></td>
+			<td>${vo.area}</td>
 			<td></td>
 			<td></td>
 			<td></td>
